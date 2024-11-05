@@ -1,0 +1,32 @@
+from plyer import notification
+from datetime import datetime
+def alerta(nivel, base, etapa): 
+    if nivel == 1:
+        titulo = "Alerta Baixo"
+    elif nivel == 2:
+        titulo = "Alerta Médio"
+    elif nivel == 3:
+        titulo = "Alerta Alto"
+    else:
+        titulo = "Alerta Desconhecido"
+
+    # Inicializa a mensagem como vazia
+    mensagem = ""
+
+    if base == "cliente" and etapa == "ingestao":
+        mensagem = "Falha de carregamento na base cliente na etapa de ingestao"
+    elif base == "fatura" and etapa == "extração":
+        mensagem = "Falha de carregamento na base fatura na etapa de extração"
+    else:
+        mensagem = "Base ou etapa desconhecida"
+
+    # Envia a notificação
+    notification.notify(
+        title=titulo,
+        message=mensagem,
+        app_name="appteste",
+        timeout=10
+    )
+
+# Exemplo de chamada da função
+alerta(1, "cliente", "ingestao")
