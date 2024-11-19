@@ -1,4 +1,4 @@
-import pandas as pd  #antes de importar o pandas aqui, dei um pip install pandas e openpyxl no terminal mesmo
+import pandas as pd  #antes de importar o pandas aqui, dei um pip install pandas e openpyxl no terminal do vscode mesmo
 
 # carregando o arquivo dos consoles
 file_path = r"C:\Users\adria\Videos\Documents-main\Documents-main\exercicios python\best-selling game consoles.xlsx"
