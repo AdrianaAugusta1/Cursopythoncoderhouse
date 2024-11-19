@@ -1,0 +1,34 @@
+import pandas as pd
+
+# Passo 1: Carregar o arquivo Excel
+file_path = r"C:\Users\adria\Videos\Documents-main\Documents-main\exercicios python\best-selling game consoles.xlsx"
+data = pd.ExcelFile(file_path)
+
+# Passo 2: Carregar a aba 'consoles'
+consoles_df = data.parse('consoles')
+
+# Passo 3: Contar quantos consoles existem na base por companhia
+company_counts = consoles_df['Company'].value_counts().reset_index()
+company_counts.columns = ['Company', 'qtd']
+
+# Passo 4: Ordenar o resultado pela quantidade de consoles de forma decrescente
+company_counts_sorted = company_counts.sort_values(by='qtd', ascending=False).reset_index(drop=True)
+
+# Passo 5: Adicionar a coluna "Market Value" (simulada aqui)
+# Como não temos o arquivo "company.txt", crie uma coluna fictícia com valores para simular o resultado
+market_values = {
+    'Nintendo': 22615, 'Sega': 10391, 'Sony': 7177, 'Atari': 4160,
+    'Microsoft': 3154, 'Coleco': 767, 'Tectoy': 2538, 'Bandai': 913,
+    'Magnavox/Philips': 693, 'Mattel': 548, 'Micro Genius': 689,
+    'NEC': 387, 'NEC/Hudson Soft(note 6)': 547, 'Nokia': 637, 'Philips': 899
+}
+
+# Mapear os valores de mercado para as companhias
+company_counts_sorted['Market Value'] = company_counts_sorted['Company'].map(market_values)
+
+# Passo 6: Calcular o valor médio de "Market Value" por console
+market_value_mean = company_counts_sorted['Market Value'].mean()
+
+# Passo 7: Exibir os resultados
+print(company_counts_sorted)
+print(f"Valor médio de Market Value por console: {market_value_mean}")
